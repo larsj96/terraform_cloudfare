@@ -40,3 +40,19 @@ locals {
   comment = "Created by terraform"
 
  }
+
+ # Azure DNS for azure.lanilsen.xyz
+ resource "cloudflare_record" "azure_lanilsen_xyz_ns" {
+  for_each = toset([
+    "ns1-37.azure-dns.com.",
+    "ns2-37.azure-dns.net.",
+    "ns3-37.azure-dns.org.",
+    "ns4-37.azure-dns.info.",
+  ])
+
+  zone_id = "37b50951304d33118935e0fcfe56f04c"
+  name    = "azure"
+  type    = "NS"
+  value   = each.value
+  ttl     = 1 # Automatisk TTL
+}
