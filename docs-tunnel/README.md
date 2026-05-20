@@ -25,7 +25,6 @@ terraform init -backend-config=backend.r2.tfbackend
 
 ```bash
 export CLOUDFLARE_API_TOKEN="..."
-export TF_VAR_cloudflare_api_token="$CLOUDFLARE_API_TOKEN"
 export AWS_ACCESS_KEY_ID="..."
 export AWS_SECRET_ACCESS_KEY="..."
 
