@@ -22,6 +22,18 @@ variable "docs_origin_url" {
   default     = "http://10.0.0.37"
 }
 
+variable "grafana_hostname" {
+  description = "Public Grafana hostname."
+  type        = string
+  default     = "grafana.lanilsen.com"
+}
+
+variable "grafana_origin_url" {
+  description = "Internal Grafana origin URL reached from cloudflared."
+  type        = string
+  default     = "http://10.0.0.38:3000"
+}
+
 variable "tunnel_name" {
   description = "Cloudflare Tunnel name."
   type        = string
