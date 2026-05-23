@@ -25,23 +25,33 @@ resource "cloudflare_zero_trust_tunnel_cloudflared_config" "docs" {
   tunnel_id  = cloudflare_zero_trust_tunnel_cloudflared.docs.id
 
   config = {
-    ingress = [
-      {
-        hostname = var.docs_hostname
-        service  = var.docs_origin_url
-      },
-      {
-        hostname = var.grafana_hostname
-        service  = var.grafana_origin_url
-      },
-      {
-        hostname = var.auth_hostname
-        service  = var.auth_origin_url
-      },
-      {
-        service = "http_status:404"
-      },
-    ]
+    ingress = concat(
+      [
+        {
+          hostname = var.docs_hostname
+          service  = var.docs_origin_url
+        },
+        {
+          hostname = var.grafana_hostname
+          service  = var.grafana_origin_url
+        },
+        {
+          hostname = var.auth_hostname
+          service  = var.auth_origin_url
+        },
+      ],
+      [
+        for app in values(var.public_tunnel_apps) : {
+          hostname = app.hostname
+          service  = app.origin_url
+        }
+      ],
+      [
+        {
+          service = "http_status:404"
+        },
+      ]
+    )
   }
 }
 
@@ -94,6 +104,18 @@ resource "cloudflare_dns_record" "auth" {
   proxied = true
   ttl     = 1
   comment = "Terraform-managed Cloudflare Tunnel record for Authentik SSO."
+}
+
+resource "cloudflare_dns_record" "public_tunnel_apps" {
+  for_each = var.public_tunnel_apps
+
+  zone_id = var.cloudflare_zone_id
+  name    = each.value.hostname
+  type    = "CNAME"
+  content = "${cloudflare_zero_trust_tunnel_cloudflared.docs.id}.cfargotunnel.com"
+  proxied = true
+  ttl     = 1
+  comment = "Terraform-managed Cloudflare Tunnel record for ${each.key}."
 }
 
 resource "cloudflare_dns_record" "mgmt" {

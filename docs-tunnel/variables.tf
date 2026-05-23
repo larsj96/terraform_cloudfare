@@ -87,3 +87,22 @@ variable "management_access_allowed_source_cidrs" {
   type        = list(string)
   default     = ["213.52.58.244/32"]
 }
+
+variable "public_tunnel_apps" {
+  description = "Additional lanilsen.com hostnames served by the homelab-docs tunnel. Use this for web apps and reverse-proxy origins, not bulk media streaming."
+  type = map(object({
+    hostname         = string
+    origin_url       = string
+    access_enabled   = optional(bool, true)
+    allowed_emails   = optional(list(string), ["larsj96@gmail.com"])
+    session_duration = optional(string, "24h")
+  }))
+
+  default = {
+    plex1 = {
+      hostname       = "plex1.lanilsen.com"
+      origin_url     = "http://plex1.mgmt.nilsen-tech.com:32400"
+      access_enabled = false
+    }
+  }
+}

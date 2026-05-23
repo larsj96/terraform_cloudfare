@@ -55,3 +55,10 @@ output "mgmt_cloudflared_tunnel_token" {
   value     = data.cloudflare_zero_trust_tunnel_cloudflared_token.mgmt.token
   sensitive = true
 }
+
+output "public_tunnel_app_hostnames" {
+  description = "Additional public hostnames routed through the homelab-docs tunnel."
+  value = {
+    for name, app in var.public_tunnel_apps : name => app.hostname
+  }
+}
