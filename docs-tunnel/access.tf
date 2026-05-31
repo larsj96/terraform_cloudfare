@@ -7,7 +7,6 @@ locals {
   docs_authenticated_emails = [
     "larsj96@gmail.com",
     "jaguni@gmail.com",
-    "mikael.fjell@hotmail.com",
   ]
 }
 
