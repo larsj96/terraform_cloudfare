@@ -99,6 +99,13 @@ variable "public_tunnel_apps" {
   }))
 
   default = {
+    cs2 = {
+      hostname         = "cs2.lanilsen.com"
+      origin_url       = "http://10.0.0.37:33080"
+      access_enabled   = true
+      allowed_emails   = ["larsj96@gmail.com", "mikael.fjell@hotmail.com"]
+      session_duration = "24h"
+    }
     plex1 = {
       hostname       = "plex1.lanilsen.com"
       origin_url     = "http://plex1.mgmt.nilsen-tech.com:32400"

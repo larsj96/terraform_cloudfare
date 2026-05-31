@@ -5,5 +5,5 @@ resource "cloudflare_dns_record" "cs2" {
   content = var.vps_ipv4_address
   proxied = false
   ttl     = var.ttl
-  comment = "Terraform-managed DNS-only CS2 endpoint for the Frankfurt VPS."
+  comment = "Terraform-managed DNS-only CS2 game endpoint for the Frankfurt VPS."
 }

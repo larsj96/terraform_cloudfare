@@ -7,7 +7,7 @@ variable "cloudflare_zone_id" {
 variable "hostname" {
   description = "CS2 public hostname."
   type        = string
-  default     = "cs2.lanilsen.com"
+  default     = "game.cs2.lanilsen.com"
 }
 
 variable "vps_ipv4_address" {

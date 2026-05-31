@@ -9,6 +9,7 @@ Terraform stack for exposing selected internal homelab services through Cloudfla
   - `docs.lanilsen.com` -> `http://10.0.0.35`
   - `grafana.lanilsen.com` -> `http://10.0.0.38:3000`
   - `auth.lanilsen.com` -> `http://10.0.0.36:9000`
+  - `cs2.lanilsen.com` -> `http://10.0.0.37:33080`
   - additional entries from `public_tunnel_apps`
   - fallback -> `http_status:404`
 - Cloudflare Tunnel: `homelab-mgmt`
@@ -20,6 +21,7 @@ Terraform stack for exposing selected internal homelab services through Cloudfla
   - `docs.lanilsen.com` -> `<tunnel-id>.cfargotunnel.com`
   - `grafana.lanilsen.com` -> `<docs-tunnel-id>.cfargotunnel.com`
   - `auth.lanilsen.com` -> `<docs-tunnel-id>.cfargotunnel.com`
+  - `cs2.lanilsen.com` -> `<docs-tunnel-id>.cfargotunnel.com`
   - each `public_tunnel_apps[*].hostname` -> `<docs-tunnel-id>.cfargotunnel.com`
   - `mgmt.lanilsen.com` -> `<mgmt-tunnel-id>.cfargotunnel.com`
   - `code.lanilsen.com` -> `<mgmt-tunnel-id>.cfargotunnel.com`
