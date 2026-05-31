@@ -1,3 +1,16 @@
+locals {
+  default_authenticated_emails = [
+    "larsj96@gmail.com",
+    "mikael.fjell@hotmail.com",
+  ]
+
+  docs_authenticated_emails = [
+    "larsj96@gmail.com",
+    "jaguni@gmail.com",
+    "mikael.fjell@hotmail.com",
+  ]
+}
+
 resource "cloudflare_zero_trust_access_application" "docs" {
   account_id           = var.cloudflare_account_id
   name                 = "Homelab Docs"
@@ -14,16 +27,11 @@ resource "cloudflare_zero_trust_access_application" "docs" {
     precedence       = 1
 
     include = [
-      {
+      for email_address in local.docs_authenticated_emails : {
         email = {
-          email = "larsj96@gmail.com"
+          email = email_address
         }
-      },
-      {
-        email = {
-          email = "jaguni@gmail.com"
-        }
-      },
+      }
     ]
   }]
 }
@@ -44,11 +52,11 @@ resource "cloudflare_zero_trust_access_application" "grafana" {
     precedence       = 1
 
     include = [
-      {
+      for email_address in local.default_authenticated_emails : {
         email = {
-          email = "larsj96@gmail.com"
+          email = email_address
         }
-      },
+      }
     ]
 
   }]
@@ -141,7 +149,7 @@ resource "cloudflare_zero_trust_access_application" "public_tunnel_apps" {
     precedence       = 1
 
     include = [
-      for email_address in try(each.value.allowed_emails, ["larsj96@gmail.com"]) : {
+      for email_address in try(each.value.allowed_emails, local.default_authenticated_emails) : {
         email = {
           email = email_address
         }

@@ -94,7 +94,7 @@ variable "public_tunnel_apps" {
     hostname         = string
     origin_url       = string
     access_enabled   = optional(bool, true)
-    allowed_emails   = optional(list(string), ["larsj96@gmail.com"])
+    allowed_emails   = optional(list(string))
     session_duration = optional(string, "24h")
   }))
 
