@@ -1,13 +1,13 @@
 variable "cloudflare_zone_id" {
-  description = "Cloudflare zone ID for lanilsen.xyz."
+  description = "Cloudflare zone ID for lanilsen.com."
   type        = string
-  default     = "37b50951304d33118935e0fcfe56f04c"
+  default     = "e3aca4623d7fcdc887ecfe460106e11e"
 }
 
 variable "hostname" {
   description = "CS2 public hostname."
   type        = string
-  default     = "cs2.lanilsen.xyz"
+  default     = "cs2.lanilsen.com"
 }
 
 variable "vps_ipv4_address" {

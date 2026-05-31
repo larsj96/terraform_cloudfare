@@ -7,7 +7,7 @@ Terraform stack for the public Counter-Strike 2 endpoint.
 DNS-only records:
 
 ```text
-cs2.lanilsen.xyz -> 72.61.95.150
+cs2.lanilsen.com -> 72.61.95.150
 ```
 
 This must stay `proxied = false`. Cloudflare proxy and Tunnel only handle HTTP(S)-style traffic, while CS2 clients connect directly to the VPS on UDP/TCP `27016`.
@@ -15,7 +15,7 @@ This must stay `proxied = false`. Cloudflare proxy and Tunnel only handle HTTP(S
 Players should connect with:
 
 ```text
-connect cs2.lanilsen.xyz:27016
+connect cs2.lanilsen.com:27016
 ```
 
 ## Backend
